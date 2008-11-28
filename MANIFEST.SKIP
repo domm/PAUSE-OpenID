@@ -1,0 +1,15 @@
+^MANIFEST\.
+~$
+^#
+\.old$
+^blib/
+^pm_to_blib
+\.gz$
+^[^/]+\.yaml$
+^[^/]+\.pl$
+^\.shipit$
+\B.git$
+\bcover_db
+\bBuild$
+\bBuild.bat$
+\b_build
