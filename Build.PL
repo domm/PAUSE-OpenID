@@ -18,7 +18,7 @@ my $builder = Module::Build->new(
         'Catalyst::Plugin::Session'                    => '0',
         'Catalyst::Plugin::Session::State::Cookie'     => '0',
         'Catalyst::Plugin::Session::Store::FastMmap'   => '0',
-
+        'Crypt::SSLeay'=>'0',
 
 
     },
