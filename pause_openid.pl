@@ -23,7 +23,7 @@ return {
     },
    
     'PAUSE::OpenID'=>{
-        hostname=>'id.pause.org',
+        baseurl=>'https://id.pause.org/',
     },
 
 };

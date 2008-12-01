@@ -13,7 +13,7 @@
         <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
           <head>
             <title>Sign in with OpenID</title>
-            <link rel="openid.server" href="https://localhost/openid" />
+            <link rel="openid.server" href="{config[@key='baseurl']/@value}/openid" />
             <style type="text/css">
                 @import "default.css";
             </style>
