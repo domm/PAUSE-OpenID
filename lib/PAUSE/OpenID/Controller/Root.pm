@@ -29,7 +29,7 @@ PAUSE::OpenID::Controller::Root - Root Controller for PAUSE::OpenID
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    if ( not $c->req->param('openid.return_url') ) {
+    if ( not defined $c->req->param('openid.return_to') ) {
         #$c->flash->{xml} = '<document><error_message>Missing parameter</error_message></document>';
         $c->res->redirect($c->uri_for('/error'));
     }
