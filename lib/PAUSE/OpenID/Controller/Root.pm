@@ -62,6 +62,7 @@ sub error :Local {
 
 sub default :Path {
     my ( $self, $c ) = @_;
+    $c->response->content_type('text/plain');
     $c->response->body( 'Page not found' );
     $c->response->status(404);
     
