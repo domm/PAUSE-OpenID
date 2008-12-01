@@ -32,6 +32,11 @@ sub index :Path :Args(0) {
 $c->stash->{xml} =<<XML;
 <document/>
 XML
+    
+    # Pass through parameters (unchecked for now)
+    foreach my $key ( keys %{$c->req->params} ) {
+        $c->stash->{$key} = $c->req->param($key);
+    }
 
     # Hello World
     $c->forward('PAUSE::OpenID::View::XSLT');
@@ -42,6 +47,31 @@ sub default :Path {
     $c->response->body( 'Page not found' );
     $c->response->status(404);
     
+}
+
+sub login :Local {
+    my ( $self, $c ) = @_;
+    
+    my $username = $c->req->param('username');
+    my $password = $c->req->param('password');
+    
+    $c->log->debug('username "'.$username.'" login attemp');
+    
+    $c->res->redirect($c->uri_for('/login_failed'));
+}
+
+sub login_pass {
+    my ( $self, $c ) = @_;
+    
+    $c->res->content_type('text/plain');
+    $c->res->body('login pass');
+}
+
+sub login_failed {
+    my ( $self, $c ) = @_;
+    
+    $c->res->content_type('text/plain');
+    $c->res->body('login fail');
 }
 
 =head2 end
