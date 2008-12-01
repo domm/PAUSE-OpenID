@@ -13,6 +13,7 @@ my $builder = Module::Build->new(
         'perl'                => '5.010',
         'Catalyst::Runtime'   => '5.7014',
         'Net::OpenID::Server' => '1.02',
+        'Catalyst::View::XSLT' => 0,
     },
     add_to_cleanup       => ['PAUSE-OpenID-*'],
     create_makefile_pl   => 'passthrough',
