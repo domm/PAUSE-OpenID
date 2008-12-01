@@ -8,8 +8,7 @@ use base 'Catalyst::View::XSLT';
 __PACKAGE__->config(
    # relative paths to the directories with templates
 	INCLUDE_PATH => [
-		MyApp->path_to( 'root', 'xslt' ),
-		MyApp->path_to( 'templates', 'xsl' ),
+		PAUSE::OpenID->path_to( 'root', 'templates' ),
 	],
 	TEMPLATE_EXTENSION => '.xsl', # default extension when getting template name from the current action
 	DUMP_CONFIG => 1, # use for Debug. Will dump the final (merged) configuration for XSLT view
