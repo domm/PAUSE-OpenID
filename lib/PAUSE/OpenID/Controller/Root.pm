@@ -5,6 +5,7 @@ use warnings;
 use parent 'Catalyst::Controller';
 
 use LWP::UserAgent;
+use Regexp::Common qw /URI/;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -39,6 +40,10 @@ sub index :Path :Args(0) {
     # TODO: check if its a valid URL
     if ( not defined $return_to ) {
         #$c->flash->{xml} = '<document><error_message>Missing parameter</error_message></document>';
+        $c->res->redirect($c->uri_for('/error'));
+    }
+    elsif ( $return_to !~ /$RE{URI}{HTTP}/ ) { #{'-scheme'=>'P'}
+        #$c->flash->{xml} = '<document><error_message>Invalid URI</error_message></document>';
         $c->res->redirect($c->uri_for('/error'));
     }
 
