@@ -13,3 +13,5 @@
 \bBuild$
 \bBuild.bat$
 \b_build
+^pod2htm.\.tmp$
+\.bak$
