@@ -31,14 +31,19 @@ PAUSE::OpenID::Controller::Root - Root Controller for PAUSE::OpenID
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    if ( not defined $c->req->param('openid.return_to') ) {
+    # 5.2.3
+    # If the malformed or invalid message is received by the Relying Party, or "openid.return_to" 
+    # is not present or its value is not a valid URL, the server SHOULD return a response to the end user
+    # indicating the error and that it is unable to continue.
+    my $return_to =  $c->req->param('openid.return_to');
+    # TODO: check if its a valid URL
+    if ( not defined $return_to ) {
         #$c->flash->{xml} = '<document><error_message>Missing parameter</error_message></document>';
         $c->res->redirect($c->uri_for('/error'));
     }
 
-$c->stash->{xml} =<<XML;
-<document/>
-XML
+    # TODO: generate XML programatically
+    $c->stash->{xml} = sprintf('<document><config key="url" value="%s"/></document>', $c->config->{'PAUSE::OpenID'}{'baseurl'});
     
     # Pass through parameters (unchecked for now)
     foreach my $key ( keys %{$c->req->params} ) {
@@ -57,6 +62,7 @@ sub error :Local {
 
 sub default :Path {
     my ( $self, $c ) = @_;
+    $c->response->content_type('text/plain');
     $c->response->body( 'Page not found' );
     $c->response->status(404);
     
@@ -77,6 +83,7 @@ sub login :Local {
     $ua->credentials('pause.perl.org:443', 'PAUSE', $username, $password);
     my $res = $ua->request($req);
     
+    # but this is bad as the certificate is checked AFTER the credentials are send :-(
     die 'pause server certificate validation failed'
         if exists $res->headers->{'client-ssl-warning'};
     
