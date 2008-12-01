@@ -14,6 +14,13 @@ my $builder = Module::Build->new(
         'Catalyst::Runtime'   => '5.7014',
         'Net::OpenID::Server' => '1.02',
         'Catalyst::View::XSLT' => 0,
+        'Catalyst::Plugin::Cache::Memcached'           => '0.6',
+        'Catalyst::Plugin::Session'                    => '0',
+        'Catalyst::Plugin::Session::State::Cookie'     => '0',
+        'Catalyst::Plugin::Session::Store::FastMmap'   => '0',
+
+
+
     },
     add_to_cleanup       => ['PAUSE-OpenID-*'],
     create_makefile_pl   => 'passthrough',
