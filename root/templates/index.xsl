@@ -17,15 +17,16 @@
                 @import "default.css";
             </style>
           </head>
-        
+
           <body>
-            <p>The website '<xsl:value-of select="$origin_website"/>' wants to verify your PAUSE identity.</p>
+            <h1>PAUSE OpenID login service</h1>
+            <p>The website '<xsl:value-of select="$origin_website"/>' wants to verify your <a href="https://pause.perl.org/">PAUSE</a> identity.</p>
             <form method="post" action="signin" id="login_form">
               <div>
                 <label for="username"><abbr title="Perl Authors Upload Server">PAUSE</abbr> ID:</label>
                 <input name="username" id="username" type="text" />
                 <label for="password">Password:</label>
-        
+
                 <input name="password" id="password" type="password" />
                 <input type="submit" />
               </div>
