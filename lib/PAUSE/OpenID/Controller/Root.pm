@@ -71,8 +71,14 @@ sub login :Local {
     $c->log->debug('username "'.$username.'" login attempt');
     
     my $ua = LWP::UserAgent->new;
+    my $req = HTTP::Request->new(GET => 'https://pause.perl.org/pause/authenquery');
+    $req->header('If-SSL-Cert-Subject' => '/CN=pause.perl.org');
+    local $ENV{HTTPS_CA_DIR} = $c->config->{'ssl'}->{'ca_dir'};
     $ua->credentials('pause.perl.org:443', 'PAUSE', $username, $password);
-    my $res = $ua->get('https://pause.perl.org/pause/authenquery');
+    my $res = $ua->request($req);
+    
+    die 'pause server certificate validation failed'
+        if exists $res->headers->{'client-ssl-warning'};
     
     if ($res->code == 200) {
         $c->log->info('login pass');
@@ -81,6 +87,9 @@ sub login :Local {
     }
     else {
         $c->log->warn('login failed');
+        use Data::Dumper;
+        die Dumper($res);
+        
         $c->res->redirect($c->uri_for('/login_failed'));
     }
 }
