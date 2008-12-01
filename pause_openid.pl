@@ -16,11 +16,14 @@ return {
         },
     },
 
-    # Static::Simple
     'static' => {
         debug          => 0,
         logging        => 0,
         dirs           => [qw/static/],
     },
-    
+   
+    'PAUSE::OpenID'=>{
+        hostname=>'id.pause.org',
+    },
+
 };
