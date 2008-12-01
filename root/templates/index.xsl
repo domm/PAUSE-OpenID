@@ -20,7 +20,7 @@
         
           <body>
             <p>The website '<xsl:value-of select="$origin_website"/>' wants to verify your PAUSE identity.</p>
-            <form method="post" action="signin" id="login_form">
+            <form method="post" action="login" id="login_form">
               <div>
                 <label for="username"><abbr title="Perl Authors Upload Server">PAUSE</abbr> ID:</label>
                 <input name="username" id="username" type="text" />
