@@ -25,5 +25,9 @@ return {
     'PAUSE::OpenID'=>{
         hostname=>'id.pause.org',
     },
+    
+    'ssl' => {
+        'ca_dir' => '/etc/ssl/certs/',
+    }
 
 };
