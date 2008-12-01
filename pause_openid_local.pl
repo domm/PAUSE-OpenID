@@ -4,7 +4,7 @@ use warnings;
 # Returnvalue
 return {
     'PAUSE::OpenID'=>{
-        hostname=>'localhost',
+        baseurl=>'http://localhost:3000/',
     },
 
 };
