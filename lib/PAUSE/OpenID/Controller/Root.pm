@@ -29,6 +29,11 @@ PAUSE::OpenID::Controller::Root - Root Controller for PAUSE::OpenID
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
+    if ( not $c->req->param('openid.return_url') ) {
+        #$c->flash->{xml} = '<document><error_message>Missing parameter</error_message></document>';
+        $c->res->redirect($c->uri_for('/error'));
+    }
+
 $c->stash->{xml} =<<XML;
 <document/>
 XML
@@ -38,7 +43,13 @@ XML
         $c->stash->{$key} = $c->req->param($key);
     }
 
-    # Hello World
+    $c->forward('PAUSE::OpenID::View::XSLT');
+}
+
+sub error :Local {
+    my ( $self, $c ) = @_;
+    #$c->stash->{xml} = $c->flash->{xml};
+    $c->stash->{xml} = '<document/>';
     $c->forward('PAUSE::OpenID::View::XSLT');
 }
 
@@ -55,7 +66,7 @@ sub login :Local {
     my $username = $c->req->param('username');
     my $password = $c->req->param('password');
     
-    $c->log->debug('username "'.$username.'" login attemp');
+    $c->log->debug('username "'.$username.'" login attempt');
     
     $c->res->redirect($c->uri_for('/login_failed'));
 }
