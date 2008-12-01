@@ -62,6 +62,7 @@ sub error :Local {
 
 sub default :Path {
     my ( $self, $c ) = @_;
+    $c->response->content_type('text/plain');
     $c->response->body( 'Page not found' );
     $c->response->status(404);
     
@@ -82,6 +83,7 @@ sub login :Local {
     $ua->credentials('pause.perl.org:443', 'PAUSE', $username, $password);
     my $res = $ua->request($req);
     
+    # but this is bad as the certificate is checked AFTER the credentials are send :-(
     die 'pause server certificate validation failed'
         if exists $res->headers->{'client-ssl-warning'};
     
