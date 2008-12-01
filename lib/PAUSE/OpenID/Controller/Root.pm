@@ -82,6 +82,7 @@ sub login :Local {
     
     if ($res->code == 200) {
         $c->log->info('login pass');
+        $c->session->{pauseid} = $username;
         $c->res->redirect($c->uri_for('/login_pass'));
     }
     else {
@@ -95,7 +96,7 @@ sub login :Local {
 
 sub login_pass :Local {
     my ( $self, $c ) = @_;
-    
+
     $c->res->content_type('text/plain');
     $c->res->body('login pass');
 }
