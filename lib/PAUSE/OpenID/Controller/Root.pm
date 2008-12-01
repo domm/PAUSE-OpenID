@@ -108,6 +108,13 @@ sub login_failed :Local {
     $c->res->body('login fail');
 }
 
+sub pauseid : Regex('^(.*)/?$') {
+    my ( $self, $c ) = @_;
+    my $param = $c->req->captures->[0];
+    $c->log->error("user $param");
+
+}
+
 =head2 end
 
 Attempt to render a view, if needed.
