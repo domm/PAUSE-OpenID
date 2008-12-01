@@ -1,0 +1,33 @@
+body {
+    padding: 1.2em;
+    color: #fff;
+    background-color: #086;
+    font-family: 'DejaVu Sans', 'Arial Unicode MS', sans-serif;
+}
+
+h1,form,.redirectmessage {
+    color: #443;
+    border: 2px solid #986;
+    padding: 0.5em;
+    background-color: #fff;
+}
+
+h1 {
+    margin-bottom: 1em;
+}
+
+.redirectmessage {
+    float: left;
+    width: 50%;
+    margin-top: 0.7em;
+}
+
+form {
+    float: right;
+    width: 20%;
+    margin-top: 0.7em;
+}
+
+form input {
+    max-width: 90%;
+}

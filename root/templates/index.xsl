@@ -15,7 +15,7 @@
             <title>Sign in with OpenID</title>
             <link rel="openid.server" href="{config[@key='baseurl']/@value}/openid" />
             <style type="text/css">
-                @import "default.css";
+                @import "/static/css/default.css";
             </style>
           </head>
 
