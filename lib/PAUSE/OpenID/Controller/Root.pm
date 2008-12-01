@@ -29,8 +29,12 @@ PAUSE::OpenID::Controller::Root - Root Controller for PAUSE::OpenID
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
+$c->stash->{xml} =<<XML;
+<document/>
+XML
+
     # Hello World
-    $c->response->body( $c->welcome_message );
+    $c->forward('PAUSE::OpenID::View::XSLT');
 }
 
 sub default :Path {
