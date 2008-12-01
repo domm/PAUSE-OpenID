@@ -4,6 +4,8 @@ use strict;
 use warnings;
 use parent 'Catalyst::Controller';
 
+use LWP::UserAgent;
+
 #
 # Sets the actions in this controller to be registered with no prefix
 # so they function identically to actions created in MyApp.pm
@@ -68,17 +70,28 @@ sub login :Local {
     
     $c->log->debug('username "'.$username.'" login attempt');
     
-    $c->res->redirect($c->uri_for('/login_failed'));
+    my $ua = LWP::UserAgent->new;
+    $ua->credentials('pause.perl.org:443', 'PAUSE', $username, $password);
+    my $res = $ua->get('https://pause.perl.org/pause/authenquery');
+    
+    if ($res->code == 200) {
+        $c->log->info('login pass');
+        $c->res->redirect($c->uri_for('/login_pass'));
+    }
+    else {
+        $c->log->warn('login failed');
+        $c->res->redirect($c->uri_for('/login_failed'));
+    }
 }
 
-sub login_pass {
+sub login_pass :Local {
     my ( $self, $c ) = @_;
     
     $c->res->content_type('text/plain');
     $c->res->body('login pass');
 }
 
-sub login_failed {
+sub login_failed :Local {
     my ( $self, $c ) = @_;
     
     $c->res->content_type('text/plain');
