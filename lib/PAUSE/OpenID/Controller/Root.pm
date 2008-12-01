@@ -32,6 +32,11 @@ sub index :Path :Args(0) {
 $c->stash->{xml} =<<XML;
 <document/>
 XML
+    
+    # Pass through parameters (unchecked for now)
+    foreach my $key ( keys %{$c->req->params} ) {
+        $c->stash->{$key} = $c->req->param($key);
+    }
 
     # Hello World
     $c->forward('PAUSE::OpenID::View::XSLT');

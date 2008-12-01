@@ -7,7 +7,7 @@
     doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
     doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" indent="no"/>
 
-    <xsl:param name="origin_website"/>
+    <xsl:param name="openid.return_to"/>
 
     <xsl:template match="/document">
         <html xmlns="http://www.w3.org/1999/xhtml">
@@ -19,7 +19,7 @@
           </head>
         
           <body>
-            <p>The website '<xsl:value-of select="$origin_website"/>' wants to verify your PAUSE identity.</p>
+            <p>The website '<xsl:value-of select="$openid.return_to"/>' wants to verify your PAUSE identity.</p>
             <form method="post" action="signin" id="login_form">
               <div>
                 <label for="username"><abbr title="Perl Authors Upload Server">PAUSE</abbr> ID:</label>
