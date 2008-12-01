@@ -22,6 +22,6 @@ PAUSE::OpenID documentation is available as in POD. So you can do:
 
     % perldoc PAUSE::OpenID
 
-to read the documentation online with your favorite pager.
+to read the documentation online with your favourite pager.
 
 Thomas Klausner
